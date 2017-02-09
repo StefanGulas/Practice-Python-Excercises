@@ -1,0 +1,64 @@
+"""
+For this exercise, write the logic that asks a player to guess a
+letter and displays letters in the clue word that were guessed correctly.
+"""
+import random
+
+def letter_search(letter_def,word_def):
+    position_def = []
+    for i in range(0,len(word_def)):
+        if letter_def == word_def[i]:
+            position_def.append(i)
+    if position_def:
+        return position_def
+
+# get a random word from file sowpods.txt
+with open("sowpods.txt", "r") as f:
+    words = list(f)
+word = random.choice(words).strip()
+
+
+word_inter = ""
+position_letter = []
+letter_check = ""
+position = []
+position_back = []
+count = 0
+length = len(word)
+for i in range(0,length):
+    position.append("_ ")
+print(position)
+print("Welcome to Hangman!\n\t")
+print("The word you need to guess has %d letters\n" % (len(word)))
+print(" _" * len(word), "\n")
+while count < 10:
+    count1 = str(count + 1)
+    letter = str(input("Try " + count1 + " of 10: Guess your letter or the whole word\n\n"))
+    letter = letter.upper()
+    if len(letter) > 1:
+        if letter == word:
+            print("\nCongrats, you have guessed it correctly!\n")
+            break
+    count += 1
+    if letter in letter_check:
+        print("You have already guessed this letter")
+        count -= 1
+        continue
+    else:
+        letter_check = letter_check + letter
+    letter = letter.upper()
+    position_back = letter_search(letter,word)
+    if position_back:
+        for i in position_back:
+            position[i] = letter
+    position_print = " ".join(position)
+    print("\n\n" + position_print)
+    if count == 9:
+        print("Your last guess (6 of 6), what is the word?")
+        position_print = input()
+        letter = letter.upper()
+        break
+if position_print != word:
+    print("\n\nSorry, you did not make it. The right word was %s\n\n" % (word))
+else:
+    print("\nCongrats, you have guessed the word correctly!\n\n")
