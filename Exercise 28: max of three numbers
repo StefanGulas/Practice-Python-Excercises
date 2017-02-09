@@ -1,0 +1,44 @@
+"""
+# Implement a function that takes as input three variables, and
+# returns the largest of the three. Do this without using the
+# Python max() function!
+"""
+
+
+a = int(input("please enter value of variable 'a'\n"))
+b = int(input("please enter value of variable 'b'\n"))
+c = int(input("please enter value of variable 'c'\n"))
+
+max_value = str
+max_liste = []
+if a > b:
+    if a > c:
+        max_value = a
+        max_liste.append("a")
+    elif a == c:
+        max_liste.append(("a", "c"))
+        max_value = a
+    else:
+        max_value = c
+        max_liste.append("c")
+elif b > c:
+    max_value = b
+    max_liste.append("b")
+elif b == c:
+    max_value = c
+    max_liste.append(("b", "c"))
+elif a == b:
+    max_value = c
+    max_liste.append(("a", "b"))
+elif a == b ==c:
+    max_value = c
+    max_liste.append(("a", "b", "c"))
+else:
+    max_value = c
+    max_liste.append(c)
+print("The largest variable is %s and has the value %d" % (max_liste, max_value))
+
+# Now with the max function
+list2 = [a, b, c]
+max_list2 = max(list2)
+print(max_list2)
